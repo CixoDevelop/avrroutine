@@ -1,0 +1,30 @@
+/* It is predefinied pin numbers for make using lib smooth and easy */
+
+#define PIN_1 14
+#define PIN_2 16
+#define PIN_3 17
+#define PIN_4 18
+#define PIN_5 19
+#define PIN_6 20
+#define PIN_7 IT_IS_VCC
+#define PIN_8 IT_IS_GND
+#define PIN_9 6
+#define PIN_10 7
+#define PIN_11 21
+#define PIN_12 22
+#define PIN_13 23
+#define PIN_14 0
+#define PIN_15 1
+#define PIN_16 2
+#define PIN_17 3
+#define PIN_18 4
+#define PIN_19 5
+#define PIN_20 IT_IS_VCC
+#define PIN_21 IT_IS_AREF
+#define PIN_22 IT_IS_GND
+#define PIN_23 8
+#define PIN_24 9
+#define PIN_25 10
+#define PIN_26 11
+#define PIN_27 12
+#define PIN_28 13
