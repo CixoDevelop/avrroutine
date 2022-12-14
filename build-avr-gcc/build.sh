@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SOURCES=("pins.c shift_register.c")
+SOURCES=("pins.c shift_register.c timer.c")
 SOURCES_DIR=../sources/
 
 LIB=./libstdavr.a
