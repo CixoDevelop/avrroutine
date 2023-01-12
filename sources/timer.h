@@ -71,7 +71,7 @@ void timer_set_timeout(timer_count_t time);
 /** \def TIMER_OVERFLOW_VECTOR
  * This is interrupt vector to pass in ISR().
  */
-#define TIMER_OVERFLOW_VECTOR TIMER1_OVF_vect
+#define TIMER_TIMEOUT _VECTOR(13)
 
 #endif
 

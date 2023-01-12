@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SOURCES=("pins.c shift_register.c timer.c")
+SOURCES=("pins.c shift_register.c timer.c serial.c")
 SOURCES_DIR=../sources/
 
 LIB=./libstdavr.a
@@ -9,7 +9,7 @@ OBJECTS_DIR=./
 CC="avr-gcc"
 CC_FLAGS="-Wall -Wextra -Wpedantic -Os -std=c99 -fearly-inlining \
     -fshort-enums -Wl,--gc-sections -fdata-sections -Wno-array-bounds\
-    -ffunction-sections -DAIKO_SHORT_NUMBERS -mmcu=atmega328p"
+    -ffunction-sections -mmcu=atmega328p"
 
 AR="avr-ar"
 AR_FLAGS="-cq"

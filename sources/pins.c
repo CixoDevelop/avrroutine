@@ -14,6 +14,18 @@
 
 #endif
 
+#if defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__)
+#define LOW_PCMSK &PCMSK0
+#endif
+
+#ifndef LOW_PCMSK
+#define LOW_PCMSK &PCMSK0
+#endif 
+
+#ifndef GIMSK
+#define GIMSK PCICR
+#endif
+
 /** \fn pin_get_mask
  * This function create mask for pin, it is required for change pin state in 
  * port, pin or directory register.
@@ -91,5 +103,72 @@ void pin_set_state(pin_t pin, pin_state_t state) {
     else *pointer &= ~mask;
 
     SREG = sreg;
+}
+
+/** \fn pin_enable_pinchange
+ * This enable pinchange in the microcontroller. Warning, this clean
+ * all sets to work in pinchange interrupt pins and enable interrupts
+ * in microcontroller.
+ */
+void pin_enable_pinchange() {
+    cli();
+
+    #ifdef PCMSK0
+    PCMSK0 = 0x00;
+    GIMSK |= (1 << PCIE0);
+    #endif
+
+    #ifdef PCMSK1
+    PCMSK1 = 0x00;
+    GIMSK |= (1 << PCIE1);
+    #endif
+
+    #ifdef PCMSK2
+    PCMSK2 = 0x00;
+    GIMSK |= (1 << PCIE2);
+    #endif
+
+    #ifdef PCMSK3
+    PCMSK3 = 0x00;
+    GIMSK |= (1 << PCIE3);
+    #endif
+
+    #ifdef PCMSK4
+    PCMSK4 = 0x00;
+    GIMSK |= (1 << PCIE4);
+    #endif
+
+    #ifdef PCMSK5
+    PCMSK5 = 0x00;
+    GIMSK |= (1 << PCIE5);
+    #endif
+
+    sei();
+}
+
+/** \fn pin_set_pinchange
+ * This enable pinchange on given pin.
+ * @pin Pin to enable pinchange on it
+ */
+void pin_set_pinchange(pin_t pin) {
+    volatile uint8_t *pcmask = (LOW_PCMSK) + (
+		((uint8_t) (pin)) / 8
+	);
+    uint8_t mask = _BV (pin % 8);
+
+    *pcmask |= mask;
+}
+
+/** \fn pin_unset_pinchange
+ * This disable pinchange on given pin.
+ * @pin Pin to disable pinchange on it
+ */
+void pin_unset_pinchange(pin_t pin) {
+    volatile uint8_t *pcmask = (LOW_PCMSK) + (
+		((uint8_t) (pin)) / 8
+	);
+    uint8_t mask = _BV (pin % 8);
+
+    *pcmask &= ~mask;
 }
 

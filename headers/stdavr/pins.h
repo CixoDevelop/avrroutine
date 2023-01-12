@@ -1,5 +1,9 @@
-#ifndef PINS_H_INCLUDED
-#define PINS_H_INCLUDED
+#ifndef SOURCES_PINS_H_INCLUDED
+#define SOURCES_PINS_H_INCLUDED
+
+#include <stdbool.h>
+#include <stdint.h>
+#include <stddef.h>
 
 /** \typedef pin_t
  * This type store number of microcontroller pin
@@ -70,5 +74,24 @@ void pin_set_mode(pin_t pin, pin_mode_t mode);
  * @state New state of pin to set
  */
 void pin_set_state(pin_t pin, pin_state_t state);
+
+/** \fn pin_enable_pinchange
+ * This enable pinchange in the microcontroller. Warning, this clean
+ * all sets to work in pinchange interrupt pins and enable interrupts
+ * in microcontroller.
+ */
+void pin_enable_pinchange();
+
+/** \fn pin_set_pinchange
+ * This enable pinchange on given pin.
+ * @pin Pin to enable pinchange on it
+ */
+void pin_set_pinchange(pin_t pin);
+
+/** \fn pin_unset_pinchange
+ * This disable pinchange on given pin.
+ * @pin Pin to disable pinchange on it
+ */
+void pin_unset_pinchange(pin_t pin);
 
 #endif

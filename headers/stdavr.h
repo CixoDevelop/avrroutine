@@ -4,5 +4,6 @@
 #include "stdavr/pins.h"
 #include "stdavr/shift_register.h"
 #include "stdavr/timer.h"
+#include "stdavr/serial.h"
 
 #endif
