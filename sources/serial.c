@@ -3,6 +3,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "serial.h"
+#include "chip.h"
 
 /** \def SERIAL_RECEIVED_BUFFER_SIZE
  * Size of receive buffer. This can be changed from build command line. By
@@ -27,45 +28,40 @@ uint8_t serial_received_buffer_position;
  */
 void (*serial_received_callback)();
 
+#ifdef ENABLE_SERIAL
 /** \fn serial_init
  * This function initialise hardware serial with speed givern in parameter.
  * @speed Buad rate to select
  */
-void serial_init(
-    uint16_t speed 
-) {
-#if defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__)
+void serial_init(uint16_t speed) {
     cli();
 
     serial_received_buffer_flush();
     serial_received_callback = 0x00;
 
-    UBRR0H = (uint8_t) (speed >> 8); 
-    UBRR0L = (uint8_t) (speed);
+    SERIAL_SPEED_HIGH = (uint8_t) (speed >> 8); 
+    SERIAL_SPEED_LOW = (uint8_t) (speed);
     
-    UCSR0C = (1 << USBS0) | (3 << UCSZ00);
-    UCSR0B = 
-        (1 << RXEN0) | 
-        (1 << TXEN0) |
-        (1 << RXCIE0); 
+    SERIAL_CONTROL_FORMAT = SERIAL_STANDARD_FORMAT;
+    SERIAL_CONTROL_ENABLE = 
+        SERIAL_ENABLE_RECEIVE | 
+        SERIAL_ENABLE_TRANSMIT |
+        SERIAL_ENABLE_INTERRUPT; 
 
     sei();
-#endif
 }
-
-#if defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__)
 
 /** \fn serial_get_char
  * This get one char from serial hardware buffer.
  */
 static inline char serial_get_char() {
-    return UDR0;
+    return SERIAL_DATA;
 }
 
 /** \RECEIVE_ROUTINE_FOR_ATMEGA328
  * This receive single char, write it into buffer and run callback.
  */
-ISR(USART_RX_vect) {
+ISR(SERIAL_RECEIVE_VECTOR) {
     serial_received_buffer[serial_received_buffer_position++] = (
         serial_get_char()
     );
@@ -76,8 +72,6 @@ ISR(USART_RX_vect) {
     
     if (serial_received_callback != 0x00) serial_received_callback();
 }
-
-#endif
 
 /** \fn serial_received_buffer_flush
  * This function clean received buffer, and set position to first character.
@@ -119,9 +113,7 @@ void serial_set_received_callback(void (*callback)(void)) {
  * then return true, other way return false.
  */
 bool serial_is_writeable() {
-#if defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__)
-    return (UCSR0A & (1 << UDRE0));
-#endif
+    return (SERIAL_STATE & (1 << SERIAL_MUTEX));
 }
 
 /** \fn serial_write_char
@@ -130,10 +122,8 @@ bool serial_is_writeable() {
  * @payload Char to write
  */
 void serial_write_char(char payload) {
-#if defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__)
     while (!serial_is_writeable()) ;
-    UDR0 = payload;
-#endif
+    SERIAL_DATA = payload;
 }
 
 /** \fn serial_write_string
@@ -145,3 +135,5 @@ void serial_write_string(char *payload) {
         serial_write_char(*payload);
     } while (*(payload++) != 0x00);
 }
+
+#endif

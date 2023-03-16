@@ -4,27 +4,16 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#if defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__)
-
-/** \def BUADRATE_9600
- * This is for serial_init, and it is 9600 speed.
+/** \def BUADRATE
+ * This is for serial_init, and it can calc value to setup.
  */
-#define BUADRATE_9600 F_CPU/16/9600-1 
-
-/** \def BUADRATE_115200
- * This is for serial_init, and it is 115200 speed.
- */
-#define BUADRATE_115200 F_CPU/16/115200-1
-
-#endif
+#define BUADRATE(X) (F_CPU/16/(X)-1)
 
 /** \fn serial_init
  * This function initialise hardware serial with speed givern in parameter.
  * @speed Buad rate to select
  */
-void serial_init(
-    uint16_t speed
-);
+void serial_init(uint16_t speed);
 
 /** \fn serial_get_received_buffer
  * This function return pointer to buffer with received data. Thia is 

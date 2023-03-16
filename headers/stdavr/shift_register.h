@@ -1,5 +1,5 @@
-#ifndef SHIFT_REGISTER_H_INCLUDED
-#define SHIFT_REGISTER_H_INCLUDED
+#ifndef STDAVR_SHIFT_REGISTER_H_INCLUDED
+#define STDAVR_SHIFT_REGISTER_H_INCLUDED
 
 #include <stdint.h>
 #include <stdbool.h>

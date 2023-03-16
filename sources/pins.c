@@ -3,29 +3,9 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "pins.h"
+#include "chip.h"
 
-#ifndef LOW_PORT
-
-#ifdef PORTA
-#define LOW_PORT &PORTA
-#else
-#define LOW_PORT &PORTB
-#endif
-
-#endif
-
-#if defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__)
-#define LOW_PCMSK &PCMSK0
-#endif
-
-#ifndef LOW_PCMSK
-#define LOW_PCMSK &PCMSK0
-#endif 
-
-#ifndef GIMSK
-#define GIMSK PCICR
-#endif
-
+#ifdef ENABLE_PINS
 /** \fn pin_get_mask
  * This function create mask for pin, it is required for change pin state in 
  * port, pin or directory register.
@@ -104,7 +84,9 @@ void pin_set_state(pin_t pin, pin_state_t state) {
 
     SREG = sreg;
 }
+#endif
 
+#ifdef ENABLE_PINCHANGE
 /** \fn pin_enable_pinchange
  * This enable pinchange in the microcontroller. Warning, this clean
  * all sets to work in pinchange interrupt pins and enable interrupts
@@ -171,4 +153,4 @@ void pin_unset_pinchange(pin_t pin) {
 
     *pcmask &= ~mask;
 }
-
+#endif

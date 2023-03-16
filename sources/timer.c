@@ -2,7 +2,9 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "timer.h"
+#include "chip.h"
 
+#ifdef ENABLE_TIMER
 /** \fn timer_enable
  * This function enable timer.
  */
@@ -24,3 +26,4 @@ void timer_set_timeout(timer_count_t time) {
     TIMER_VALUE = time;
     TIMER_CLOCK_SOURCE = TIMER_CLOCK_START;
 }
+#endif

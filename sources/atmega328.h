@@ -1,5 +1,42 @@
-/* It is predefinied pin numbers for make using lib smooth and easy */
+#ifndef STDAVR_CHIP_MODEL_INCLUDED
+#define STDAVR_CHIP_MODEL_INCLUDED
 
+/* For functions support */
+#define ENABLE_PINS
+#define ENABLE_PINCHANGE
+#define ENABLE_SERIAL
+#define ENABLE_TIMER
+
+/* For pins support */
+#define LOW_PCMSK &PCMSK0
+#define GIMSK PCICR
+#define LOW_PORT &PORTB
+
+/* Timer support */
+#define TIMER_CLOCK_SOURCE TCCR1B
+#define TIMER_CLOCK_START ((1 << CS11) | (1 << CS10))
+#define TIMER_CLOCK_STOP 0x00
+#define TIMER_PRESCALLER 8
+#define TIMER_INTERRUPT_SETTINGS TIMSK1
+#define TIMER_ENABLE_INTERRUPT ((1 << TOIE1))
+#define TIMER_VALUE TCNT1
+#define TIMER_TIMEOUT _VECTOR(13)
+
+/* Serial support */
+#define SERIAL_DATA UDR0
+#define SERIAL_STATE UCSR0A
+#define SERIAL_MUTEX UDRE0
+#define SERIAL_SPEED_LOW UBRR0L
+#define SERIAL_SPEED_HIGH UBRR0H
+#define SERIAL_CONTROL_FORMAT UCSR0C
+#define SERIAL_CONTROL_ENABLE UCSR0B
+#define SERIAL_ENABLE_RECEIVE (1 << RXEN0)
+#define SERIAL_ENABLE_TRANSMIT (1 << TXEN0)
+#define SERIAL_ENABLE_INTERRUPT (1 << RXCIE0)
+#define SERIAL_STANDARD_FORMAT ((1 << USBS0) | (3 << UCSZ00))
+#define SERIAL_RECEIVE_VECTOR _VECTOR(USART_RX_vect_num)
+
+/* Pin map */
 #define PIN_1 14
 #define PIN_2 16
 #define PIN_3 17
@@ -28,3 +65,5 @@
 #define PIN_26 11
 #define PIN_27 12
 #define PIN_28 13
+
+#endif

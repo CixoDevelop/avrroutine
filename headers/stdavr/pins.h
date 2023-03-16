@@ -1,9 +1,10 @@
-#ifndef SOURCES_PINS_H_INCLUDED
-#define SOURCES_PINS_H_INCLUDED
+#ifndef STDAVR_PINS_H_INCLUDED
+#define STDAVR_PINS_H_INCLUDED
 
 #include <stdbool.h>
 #include <stdint.h>
 #include <stddef.h>
+#include <avr/io.h>
 
 /** \typedef pin_t
  * This type store number of microcontroller pin
