@@ -14,7 +14,7 @@ typedef uint16_t timer_count_t;
  * This is useable for calc how much tick must timer count
  */
 #define TIMER_CALC(X) ((uint16_t) \
-    ((0xFFFF - ((X) * (F_CPU / TIMER_PRESCALLER)))))
+    (0xFFFF - ((X) * (F_CPU / TIMER_PRESCALLER / 1000))))
 
 /** \fn timer_enable
  * This function enable timer.
