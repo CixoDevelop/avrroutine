@@ -37,7 +37,6 @@ void serial_init(uint16_t speed) {
     cli();
 
     serial_received_buffer_flush();
-    serial_received_callback = 0x00;
 
     SERIAL_SPEED_HIGH = (uint8_t) (speed >> 8); 
     SERIAL_SPEED_LOW = (uint8_t) (speed);
