@@ -37,6 +37,7 @@ void serial_init(uint16_t speed) {
     cli();
 
     serial_received_buffer_flush();
+    serial_received_callback = 0x00;
 
     SERIAL_SPEED_HIGH = (uint8_t) (speed >> 8); 
     SERIAL_SPEED_LOW = (uint8_t) (speed);
@@ -57,7 +58,7 @@ static inline char serial_get_char() {
     return SERIAL_DATA;
 }
 
-/** \RECEIVE_ROUTINE_FOR_ATMEGA328
+/** \RECEIVE_ROUTINE
  * This receive single char, write it into buffer and run callback.
  */
 ISR(SERIAL_RECEIVE_VECTOR) {

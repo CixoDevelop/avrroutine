@@ -31,7 +31,7 @@
 #define SERIAL_ENABLE_TRANSMIT (1 << TXEN)
 #define SERIAL_ENABLE_INTERRUPT (1 << RXCIE)
 #define SERIAL_STANDARD_FORMAT ((1 << USBS) | (3 << UCSZ0) | (1 << URSEL))
-#define SERIAL_RECEIVE_VECTOR _VECTOR(USART_RXC_vect_num)
+#define SERIAL_RECEIVE_VECTOR USART_RXC_vect
 
 /* Pin map */
 #define PIN_1 14
