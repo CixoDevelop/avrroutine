@@ -7,7 +7,7 @@
  * write the same thing over and over again in your AVR-based projects if you 
  * don't want to use Arduino.
  * 
- * Autor: Cixo
+ * Author: Cixo
  */
 
 #include "driver_engine.h"
