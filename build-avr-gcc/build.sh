@@ -3,7 +3,7 @@
 SOURCES=("pins.c shift_register.c timer.c serial.c driver_engine.c")
 SOURCES_DIR=../sources/
 
-LIB=./libstdavr.a
+LIB=./libavrroutine.a
 OBJECTS_DIR=./
 
 CC="avr-gcc"

@@ -10,19 +10,15 @@
  * Autor: Cixo
  */
 
-#ifndef AVRROUTINE_CHIP_H_INCLUDED
-#define AVRROUTINE_CHIP_H_INCLUDED
+#ifndef CX_AVRROUTINE_H_INCLUDED
+#define CX_AVRROUTINE_H_INCLUDED
 
 #include <avr/io.h>
-
-/* This include propertly definitions for chip */
-
-#if defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__)
-#include "atmega328.h"
-#endif
-
-#if defined(__AVR_ATmega8__) || defined(__AVR_ATmega8P__)
-#include "atmega8.h"
-#endif
+#include "avrroutine/chip.h"
+#include "avrroutine/pins.h"
+#include "avrroutine/shift_register.h"
+#include "avrroutine/timer.h"
+#include "avrroutine/serial.h"
+#include "avrroutine/driver_engine.h"
 
 #endif

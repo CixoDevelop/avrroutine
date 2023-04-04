@@ -1,5 +1,17 @@
-#ifndef STDAVR_PINS_H_INCLUDED
-#define STDAVR_PINS_H_INCLUDED
+/*
+ * This is the avrroutine library file. This library is designed to simplify 
+ * basic operations related to AVR microcontrollers, such as timers, serial, 
+ * and using pins in a way similar to Arduino. In addition to these tasks, 
+ * the library also has support for basic electronic components, such as 
+ * shift registers and H-bridges. Thanks to this library, you don't have to 
+ * write the same thing over and over again in your AVR-based projects if you 
+ * don't want to use Arduino.
+ * 
+ * Autor: Cixo
+ */
+
+#ifndef AVRROUTINE_PINS_H_INCLUDED
+#define AVRROUTINE_PINS_H_INCLUDED
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -38,41 +50,45 @@ typedef enum {
 /** \fn pin_get_mask
  * This function create mask for pin, it is required for change pin state in 
  * port, pin or directory register.
- * @pin Pin number to work on
+ * @param pin Pin number to work on
+ * @return Binary mask for pin
  */
 uint8_t pin_get_mask(pin_t pin);
 
 /** \fn pin_get_register
  * This function return pointer to register for pin, with changed type. 
  * Returned pointer is used to manipulating pin state in hardware.
- * @pin Pin number to work on
- * @type Type of register
+ * @param pin Pin number to work on
+ * @param type Type of register
+ * @return Register of that pin
  */
 volatile uint8_t* pin_get_register(pin_t pin, pin_register_t type);
 
 /** \fn pin_get_mode
  * This function return current mode of given pin.
- * @pin Pin number to work on
+ * @param pin Pin number to work on
+ * @return Current mode of pin
  */
 pin_mode_t pin_get_mode(pin_t pin);
 
 /** \fn pin_get_state 
  * This function return current state of given pin.
- * @pin Pin number to work on
+ * @param pin Pin number to work on
+ * @return Current state of pin
  */
 pin_state_t pin_get_state(pin_t pin);
 
 /** \fn pin_set_mode 
  * This functoin set new mode to given pin.
- * @pin Pin number to work on
- * @mode New mode to set 
+ * @param pin Pin number to work on
+ * @param mode New mode to set 
  */
 void pin_set_mode(pin_t pin, pin_mode_t mode);
 
 /** \fn pin_set_state
  * This function set new pin state to given pin.
- * @pin Pin numbet to work on
- * @state New state of pin to set
+ * @param pin Pin numbet to work on
+ * @param state New state of pin to set
  */
 void pin_set_state(pin_t pin, pin_state_t state);
 
@@ -85,13 +101,13 @@ void pin_enable_pinchange();
 
 /** \fn pin_set_pinchange
  * This enable pinchange on given pin.
- * @pin Pin to enable pinchange on it
+ * @param pin Pin to enable pinchange on it
  */
 void pin_set_pinchange(pin_t pin);
 
 /** \fn pin_unset_pinchange
  * This disable pinchange on given pin.
- * @pin Pin to disable pinchange on it
+ * @param pin Pin to disable pinchange on it
  */
 void pin_unset_pinchange(pin_t pin);
 

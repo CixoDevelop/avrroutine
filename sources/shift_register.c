@@ -1,3 +1,15 @@
+/*
+ * This is the avrroutine library file. This library is designed to simplify 
+ * basic operations related to AVR microcontrollers, such as timers, serial, 
+ * and using pins in a way similar to Arduino. In addition to these tasks, 
+ * the library also has support for basic electronic components, such as 
+ * shift registers and H-bridges. Thanks to this library, you don't have to 
+ * write the same thing over and over again in your AVR-based projects if you 
+ * don't want to use Arduino.
+ * 
+ * Autor: Cixo
+ */
+
 #include <stdint.h>
 #include <stdbool.h>
 #include <avr/io.h>
@@ -8,10 +20,10 @@
 /** \fn shift_register_create
  * This function create new shift register to work with it. You must pass
  * pointer to memory area when it will be stored.
- * @*part Pointer to shift register to work on
- * @ds DS or SER pin of register
- * @st ST_CP or RCLK pin of register 
- * @sh SH_CP or SRCLK pin of register
+ * @param *part Pointer to shift register to work on
+ * @param ds DS or SER pin of register
+ * @param st ST_CP or RCLK pin of register 
+ * @param sh SH_CP or SRCLK pin of register
  */
 void shift_register_create(
     shift_register_t *part, 
@@ -35,9 +47,9 @@ void shift_register_create(
 /** \fn shift_register_send
  * This function send new data into shift register. When confirm is enable,
  * then shift register will reload latch. If not, then it is only shifted.
- * @*part Pointer to shift register to work on
- * @data Data to send
- * @confirm When it is true, latch will tact, and data will be send to pins
+ * @param *part Pointer to shift register to work on
+ * @param data Data to send
+ * @param confirm When it is true, latch will tact, and data will be send to pins
  */
 void shift_register_send(shift_register_t *part, uint8_t data, bool confirm) {
     uint8_t ds_mask = pin_get_mask(part->ds); 
