@@ -25,4 +25,8 @@
 #include "atmega8.h"
 #endif
 
+#if defined(__AVR_ATtiny261__) || defined(__AVR_ATtiny261V__)
+#include "attiny261.h"
+#endif
+
 #endif

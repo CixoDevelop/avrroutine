@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SOURCES=("pins.c shift_register.c timer.c serial.c driver_engine.c")
+SOURCES=("pins.c shift_register.c timer.c serial.c driver_engine.c encoder.c")
 SOURCES_DIR=../sources/
 
 LIB=./libavrroutine.a
@@ -9,7 +9,7 @@ OBJECTS_DIR=./
 CC="avr-gcc"
 CC_FLAGS="-Wall -Wextra -Wpedantic -Os -std=c99 -fearly-inlining \
     -fshort-enums -Wl,--gc-sections -fdata-sections -Wno-array-bounds\
-    -ffunction-sections -mmcu=atmega8"
+    -ffunction-sections -mmcu=attiny261"
 
 AR="avr-ar"
 AR_FLAGS="-cq"

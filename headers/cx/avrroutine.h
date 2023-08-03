@@ -20,5 +20,6 @@
 #include "avrroutine/timer.h"
 #include "avrroutine/serial.h"
 #include "avrroutine/driver_engine.h"
+#include "avrroutine/encoder.h"
 
 #endif
